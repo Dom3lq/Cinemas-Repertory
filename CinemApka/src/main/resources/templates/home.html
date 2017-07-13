@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Spring Security Example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link href="css/bootstrap.min.css" rel="stylesheet"></link>
+<link href="css/modalcss.css" rel="stylesheet"></link>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'></link>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<a href="#" class="navbar-brand">CinemApka</a>
+
+			<div class="collapse navbar-collapse navCollapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><p class="h4 text-uppercase" style="color: #FFF;"
+							th:text="${username}" /></li>
+					<li><p th:each="role : *{user_roles}" th:object="${role}"
+							class="h5 text-uppercase text-info" th:text="${role.role}" /></li>
+				</ul>
+			</div>
+
+			<button class="navbar-toggle" data-toggle="collapse"
+				data-target=".navCollapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+
+		</div>
+	</nav>
+
+	<div class="container voffset9">
+		<div class="row col-md-12">
+			<div>
+				<div class="row col-md-5 text-center bg-primary">
+					<h3>Your cinemas:</h3>
+					<div class="list-group">
+						<div th:each="cinema : *{cinemas}" th:object="${cinema}"
+							class="list-group-item clearfix">
+							<span th:text="${cinema.name}"></span> <span class="pull-right">
+								<button class="btn btn-xs btn-success"><span class="glyphicon glyphicon-edit"></span></button>
+							</span>
+						</div>
+						<button class="btn btn-warning voffset3">
+							<span class="glyphicon glyphicon-plus-sign"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col col-md-2 voffset4"> </div>
+			<div class="row col-md-5 text-center bg-primary">
+				<h3>Your movies:</h3>
+				<div class="list-group">
+					<div th:each="movie : *{movies}" th:object="${movie}"
+						class="list-group-item clearfix voffset2 row">
+							<div class="">
+								<div class="row">
+									<span th:text="${movie.name}"></span> 
+									<span th:text="${movie.tracks.size}"></span>
+							
+								</div>
+								<div class="row">
+									
+								</div>
+							</div>
+							<div class="pull-right">
+								<a th:href="@{'/editMovie?movieId=' + *{id}}">
+									<button class="btn btn-xs btn-success"><span class="glyphicon glyphicon-edit"></span></button>
+								</a>
+							</div>
+					</div>
+					<button class="btn btn-warning voffset3" data-toggle="modal" data-target="#add-movie-modal">
+						<span class="glyphicon glyphicon-plus-sign"></span>		
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	function changeStatcard(name)
+	{
+ 		document.getElementById('modalObjectId').innerHTML = name;
+ 		document.getElementById('statcardTitle').innerHTML = name;
+
+ 		var link = "localhost:8080/getTracksInformation?name=" + name;
+
+ 	//	function updating(){
+ 		$.getJSON( link, function( json ) { 	 		
+ 			  document.getElementById('statcardTotalNumber').innerHTML = json[0];
+ 			  document.getElementById('statcardPercent').innerHTML = json[1] + "%";
+ 			  
+			  document.getElementById('statcardData').setAtribute("data-value", "[{data:[" + json[8] + ","
+					   + json[7] + "," + json[6] + "," + json[5] + "," + json[4] + "," +
+					   json[3] + "," + json[2] + "]}]");
+ 			 }); 
+	//		setTimeout("updating()", 5000);			
+ 	//	}		 		
+	}
+	</script>
+
+	<div class="modal fade" id="stats-modal" tabindex="-1" role="dialog"
+		aria-labelledby="myStatsModal" aria-hidden="true"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="statsmodal-container">
+
+				<div class="row h1">
+					<p id='modalObjectId'>modalObjectName</p>
+					tracks:
+				</div>
+				<div class="row">
+					<div class="col-sm-6 col-md-4">
+						<div class="statcard statcard-success">
+							<div class="p-a">
+								<span id="statcardTitle" class="statcard-desc">Page views</span>
+								<h2 id="statcardTotalNumber" class="statcard-number">
+									12,938 <small id="statcardPercent"
+										class="delta-indicator delta-positive">5%</small>
+								</h2>
+								<hr class="statcard-hr m-b-0"></hr>
+							</div>
+							<canvas id="statcardData" class="sparkline"
+								data-chart="spark-line"
+								data-value="[{data:[28,68,41,43,96,45,100]}]"
+								data-labels="['a','b','c','d','e','f','g']" width="378"
+								height="94">
+      </canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="add-movie-modal" tabindex="-1"
+		role="dialog" aria-labelledby="myAddMovieModal" aria-hidden="true"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="addmoviemodal-container">
+				<div class="row modal-title h1">
+					<form class="voffset2 " action="#" th:action="@{/addMoviesProposal}" th:object="${potentialMovies}" method="post">
+						<div class="list-group">
+							<!--  <a href="#" class="list-group-item checkbox" th:each="movie: ${potentialMoviesList}">
+								<span th:text="${movie.name}"></span><input type="checkbox" th:field="*{checkedMovie}" th:value="${movie}" class="pull-right"/>
+							</a>-->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="navbar navbar-fixed-bottom">
+		<div class="container">
+			<p class="navbar-text text-center">CinemApka - developed by
+				Daniel Skrzeszowski</p>
+		</div>
+	</footer>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

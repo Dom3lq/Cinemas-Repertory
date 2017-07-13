@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Spring Security Example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link href="css/bootstrap.min.css" rel="stylesheet"></link>
+</head>
+<body>
+	<div class="container voffset9">
+		<div class="row">
+			<div class="col-md-4"> </div>
+			<div class="col-md-4 bg-primary text-center">
+				<div class="row voffset2"><h2>Login to your account.</h2></div>
+				<form class="voffset2" th:action="@{/login}" method="post">
+					<div class="row voffset2">
+						<div class="col col-md-4"> </div>
+						<input class="input col-md-4" type="text" style="color:#000000;" name="username" placeholder="Username"/>
+						<div class="col col-md-4"> </div>
+						
+					</div>
+					<div class="row voffset2">
+						<div class="input col-md-4"> </div>
+						<input class="input col-md-4" type="password" style="color:#000000;" name="password" placeholder="Password"/>
+						<div class="col col-md-4"> </div>
+					</div>
+					<div class="row voffset2">
+						<input type="submit" class="btn btn-success" value="Sign In" />
+
+					</div>
+				</form>
+				<div class="row voffset2" th:if="${param.error}">Invalid
+					username and password.</div>
+				<div class="row voffset2" th:if="${param.logout}">You have
+					been logged out.</div>
+				
+				<br></br>
+			</div>
+			<div class="col-md-4"> </div>
+		</div>
+	</div>
+
+<div class="voffset9"> </div>
+	
+	<footer class="navbar navbar-fixed-bottom">
+		<div class="container">
+			<p class="navbar-text text-center">CinemApka - developed by
+				Daniel Skrzeszowski</p>
+		</div>
+	</footer>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

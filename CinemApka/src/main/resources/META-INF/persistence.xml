@@ -1,0 +1,76 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="CinemAppDB">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.user" value="public_dzodzo" />
+			<property name="javax.persistence.jdbc.password" value="ck70F2FCqeN7KmGZ9ffU" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://spl1.ipatryk.pl/public_dzodzo_app" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="hibernate.connection.useUnicode" value="true" />
+			<property name="hibernate.connection.characterEncoding"
+				value="UTF-8" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+
+			<property name="hibernate.connection.url" value="${jdbc.connection.url}" />
+			<property name="hibernate.connection.driver_class" value="${jdbc.driver.class}" />
+			<property name="hibernate.connection.username" value="${jdbc.user}" />
+			<property name="hibernate.connection.password" value="${jdbc.password}" />
+			<property name="hibernate.connection.provider_class"
+				value="org.hibernate.connection.C3P0ConnectionProvider" />
+			<property name="hibernate.c3p0.min_size" value="${min.pool.size}" />
+			<property name="hibernate.c3p0.max_size" value="${max.pool.size}" />
+			<property name="hibernate.c3p0.max_statements" value="50" />
+			<property name="hibernate.c3p0.acquire_increment" value="1" />
+			<!-- new values for fixing the DB issues with Jboss7 -->
+			<property name="hibernate.c3p0.idle_test_period" value="40" />
+			<property name="hibernate.c3p0.timeout" value="30" />
+			<!-- new properties that fix the DB issues we have in Jboss 7 -->
+			<property name="hibernate.c3p0.unreturnedConnectionTimeout"
+				value="400" />
+			<property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
+				value="true" />
+
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="CinemAppDBget">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.user" value="public_dzodzo" />
+			<property name="javax.persistence.jdbc.password" value="ck70F2FCqeN7KmGZ9ffU" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://spl1.ipatryk.pl/public_dzodzo_app" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="hibernate.connection.useUnicode" value="true" />
+			<property name="hibernate.connection.characterEncoding"
+				value="UTF-8" />
+
+			<property name="hibernate.connection.url" value="${jdbc.connection.url}" />
+			<property name="hibernate.connection.driver_class" value="${jdbc.driver.class}" />
+			<property name="hibernate.connection.username" value="${jdbc.user}" />
+			<property name="hibernate.connection.password" value="${jdbc.password}" />
+			<property name="hibernate.connection.provider_class"
+				value="org.hibernate.connection.C3P0ConnectionProvider" />
+			<property name="hibernate.c3p0.min_size" value="${min.pool.size}" />
+			<property name="hibernate.c3p0.max_size" value="${max.pool.size}" />
+			<property name="hibernate.c3p0.max_statements" value="50" />
+			<property name="hibernate.c3p0.acquire_increment" value="1" />
+			<!-- new values for fixing the DB issues with Jboss7 -->
+			<property name="hibernate.c3p0.idle_test_period" value="40" />
+			<property name="hibernate.c3p0.timeout" value="30" />
+			<!-- new properties that fix the DB issues we have in Jboss 7 -->
+			<property name="hibernate.c3p0.unreturnedConnectionTimeout"
+				value="400" />
+			<property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
+				value="true" />
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

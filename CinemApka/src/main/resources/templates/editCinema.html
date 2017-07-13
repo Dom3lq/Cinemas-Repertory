@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Cinema details editor</title>
+<meta th:field="viewport" content="width=device-width, initial-scale=1"></meta>
+<link href="css/bootstrap.min.css" rel="stylesheet"></link>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<a href="/home" class="navbar-brand">CinemApka</a>
+
+			<div class="collapse navbar-collapse navCollapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><p class="h4 text-uppercase" style="color: #FFF;"
+							th:text="${username}" /></li>
+					<li><p th:each="role : *{user_roles}" th:object="${role}"
+							class="h5 text-uppercase text-info" th:text="${role.role}" /></li>
+				</ul>
+			</div>
+
+			<button class="navbar-toggle" data-toggle="collapse"
+				data-target=".navCollapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+
+		</div>
+	</nav>
+
+<div class="container voffset6">
+<div class="row">
+	<div class="col-md-1"> </div>
+	<div class="col col-md-10" th:if="${userValidated}">
+		<form class="voffset2" action="#" th:action="@{/editCinema}" th:object="${cinema}" method="post">
+			<ul class="list-group">
+				<li class="list-group-item active h4"><span th:text="*{id}">Cinema id: </span></li>
+				<li class="list-group-item"><input type="text" th:field="*{name}" class="pull-right col-md-5" value="*{name}"/>Name: </li>
+				<li class="list-group-item"><input type="text" th:field="*{adress}" class="pull-right col-md-5" value="*{adress}"/>Adress: </li>
+				<li class="list-group-item hide"><input type="hidden" th:field="*{user}" value="*{user}"/></li>
+				<li class="list-group-item text-center voffset3">
+					<input class="btn btn-success" type="submit" value="Save" />
+					<input class="btn btn-warning" type="reset" value="Reset" />					
+				</li>
+			</ul>	
+		</form>
+	</div>
+</div>
+</div>
+
+<div class="voffset9"> </div>
+	
+	<footer class="navbar navbar-fixed-bottom">
+		<div class="container">
+			<p class="navbar-text text-center">CinemApka - developed by
+				Daniel Skrzeszowski</p>
+		</div>
+	</footer>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
